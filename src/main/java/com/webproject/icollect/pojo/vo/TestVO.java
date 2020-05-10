@@ -1,4 +1,6 @@
-package com.webproject.icollect.pojo;
+package com.webproject.icollect.pojo.vo;
+
+import com.webproject.icollect.pojo.TestDO;
 
 import java.util.List;
 
