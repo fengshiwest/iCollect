@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserLoginMapper {
-    @Select("select * from user where id=#{id}")
+    @Select("select * from User where id=#{id}")
     UserDO findUserById(int id);
 
-    @Select("select * from user where username=#{username}")
+    @Select("select * from User where uid=#{username}")
     UserDO findUserByUsername(String username);
 
-    @Insert("insert IGNORE into user(username,password,role,avatar) values(#{username},#{password},#{role},#{avatar})")
+    @Insert("insert IGNORE into User(username,password,role,avatar) values(#{username},#{password},#{role},#{avatar})")
     void insertUserIgnore(UserDO user);
 
 }
