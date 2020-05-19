@@ -58,8 +58,8 @@ class IcollectApplicationTests {
 //        comment.setCtime("123");
 //        commentService.addComment(comment);
 
-        List<CommentDO> commentDO = commentService.getCommentByTime("1");
-        System.out.println(commentDO.get(0));
+        List<CommentDO> commentDO = commentService.getCommentByTime("2");
+        System.out.println(commentDO);
     }
 
     @Test
@@ -77,7 +77,6 @@ class IcollectApplicationTests {
 
         List<DonateDO> donateDOList3 = donateService.getDonationByDonee("小红");
         System.out.println(donateDOList3.get(0).getDid());
-
 
     }
 
