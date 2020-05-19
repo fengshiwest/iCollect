@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Wan Yu on 2020/5/18
@@ -55,18 +56,25 @@ public class DonateController {
                                         @RequestParam("money") double money
                                         ){
         DonateDO donateDO = new DonateDO(pid,donor,donee,money);
-        String dtime = getTime();
-        String did = dtime.replace("-","").replace(":","").trim();
+        String did = getUUID();
         donateDO.setDid(did);
+        String dtime = getTime();
         donateDO.setDtime(dtime);
         donateService.addDonation(donateDO);
         return new ResultVO<>(200, "success", donateDO);
     }
 
     //获取时间
-    public String getTime(){
+    private String getTime(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(new Date());
     }
+
+    private String getUUID(){
+        String uuid =  UUID.randomUUID().toString();
+        return uuid;
+    }
+
+
 
 }

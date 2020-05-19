@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -41,10 +42,11 @@ public class CommentController {
                                        @RequestParam("uid") String uid,
                                        @RequestParam("content") String content
                                        ){
+
         CommentDO commentDO = new CommentDO(pid,uid,content);
-        String ctime = getTime();
-        String cid = ctime.replace("-","").replace(":","").trim();
+        String cid = getUUID();
         commentDO.setCid(cid);
+        String ctime = getTime();
         commentDO.setCtime(ctime);
         commentService.addComment(commentDO);
         return new ResultVO<>(200, "success", commentDO);
@@ -59,8 +61,13 @@ public class CommentController {
     }
 
     //获取时间
-    public String getTime(){
+    private String getTime(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(new Date());
+    }
+
+    private String getUUID(){
+        String uuid =  UUID.randomUUID().toString();
+        return uuid;
     }
 }
