@@ -1,0 +1,137 @@
+package com.webproject.icollect.pojo;
+
+
+public class ProjectDO {
+
+  private String pid;
+  private String author;
+  private String name;
+  private String introduction;
+  private String image;
+  private String startTime;
+  private String endTime;
+  private double targetMoney;
+  private double currentMoney;
+  private long isFinished;
+  private long isChecked;
+  private long isEnded;
+  private String qrCode;
+
+
+  public String getPid() {
+    return pid;
+  }
+
+  public void setPid(String pid) {
+    this.pid = pid;
+  }
+
+
+  public String getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(String author) {
+    this.author = author;
+  }
+
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public String getIntroduction() {
+    return introduction;
+  }
+
+  public void setIntroduction(String introduction) {
+    this.introduction = introduction;
+  }
+
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+
+  public String getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(String startTime) {
+    this.startTime = startTime;
+  }
+
+
+  public String getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
+  }
+
+
+  public double getTargetMoney() {
+    return targetMoney;
+  }
+
+  public void setTargetMoney(double targetMoney) {
+    this.targetMoney = targetMoney;
+  }
+
+
+  public double getCurrentMoney() {
+    return currentMoney;
+  }
+
+  public void setCurrentMoney(double currentMoney) {
+    this.currentMoney = currentMoney;
+  }
+
+
+  public long getIsFinished() {
+    return isFinished;
+  }
+
+  public void setIsFinished(long isFinished) {
+    this.isFinished = isFinished;
+  }
+
+
+  public long getIsChecked() {
+    return isChecked;
+  }
+
+  public void setIsChecked(long isChecked) {
+    this.isChecked = isChecked;
+  }
+
+
+  public long getIsEnded() {
+    return isEnded;
+  }
+
+  public void setIsEnded(long isEnded) {
+    this.isEnded = isEnded;
+  }
+
+
+  public String getQrCode() {
+    return qrCode;
+  }
+
+  public void setQrCode(String qrCode) {
+    this.qrCode = qrCode;
+  }
+
+}
