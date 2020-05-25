@@ -84,22 +84,14 @@ public class CommentController {
         if(token != null){
             String uid;
             try {
-
                 uid = TokenUtil.verifyToken(token).get("id");
-                //CommentDO commentDO = new CommentDO(pid,uid,content);
-                //如果采用json格式传递一个commentDo对象过来，其本身就携带着该用户的uid，判断是否登录就只能看token是否为空
-                //因此这里额外添加一个条件比较token中的id字段和commentDo的uid字段值是否相同，相同才继续执行
-                if(commentDO.getUid() == uid){
-                    String cid = getUUID();
-                    commentDO.setCid(cid);
-                    String ctime = getTime();
-                    commentDO.setCtime(ctime);
-                    commentService.addComment(commentDO);
-                    return new ResultVO<>(200, "success", commentDO);
-                }
-                else{
-                    return new ResultVO<Object>(400,"未登录",null);
-                }
+                commentDO.setUid(uid);
+                String cid = getUUID();
+                commentDO.setCid(cid);
+                String ctime = getTime();
+                commentDO.setCtime(ctime);
+                commentService.addComment(commentDO);
+                return new ResultVO<>(200, "success", commentDO);
 
             }catch (SignatureVerificationException | JWTDecodeException e){
                 return new ResultVO<Object>(400,"未登录",null);

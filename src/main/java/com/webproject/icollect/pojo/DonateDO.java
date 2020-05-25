@@ -10,6 +10,8 @@ public class DonateDO {
   private double money;
   private String dtime;
 
+  public DonateDO(){}
+
   public DonateDO(String did, String pid, String donor, String donee, double money, String dtime){
     this.did = did;
     this.pid = pid;

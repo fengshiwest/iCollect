@@ -75,17 +75,17 @@ class IcollectApplicationTests {
 //        commentService.addComment(comment);
 
 
-        UserDO user = new UserDO(1,"user","123456",1,"de.jpg");
-        String token = TokenUtil.getToken(user);
-        System.out.println(token);
-        String uid = TokenUtil.verifyToken(token).get("id");
-        List<CommentDO> commentDO = commentService.getCommentByTime("1");
-        CommentDO cd = new CommentDO("1",uid,"hello world");
-        String cid = "66";
-        cd.setCid(cid);
-        String ctime = "2";
-        cd.setCtime(ctime);
-        commentService.addComment(cd);
+//        UserDO user = new UserDO(1,"user","123456",1,"de.jpg");
+//        String token = TokenUtil.getToken(user);
+//        System.out.println(token);
+//        String uid = TokenUtil.verifyToken(token).get("id");
+//        List<CommentDO> commentDO = commentService.getCommentByTime("1");
+//        CommentDO cd = new CommentDO("1",uid,"hello world");
+//        String cid = "66";
+//        cd.setCid(cid);
+//        String ctime = "2";
+//        cd.setCtime(ctime);
+//        commentService.addComment(cd);
 
 //        UserDO user = new UserDO(1,"user","123456",1,"de.jpg");
 //        String token = TokenUtil.getToken(user);
