@@ -1,10 +1,7 @@
 package com.webproject.icollect.mapper;
 
 import com.webproject.icollect.pojo.DonateDO;
-<<<<<<< HEAD
 import com.webproject.icollect.pojo.UserDO;
-=======
->>>>>>> 161036aa6be2789df3ec10102fbe656a648337dc
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -31,10 +28,7 @@ public interface DonateMapper {
 
     @Insert("insert into Donate(did,pid,donor,donee,money,dtime) values(#{did},#{pid},#{donor},#{donee},#{money},#{dtime})")
     void addDonation(DonateDO donateDO);
-<<<<<<< HEAD
 
-    @Select("select * from User where uid=#{id}")
+    @Select("select * from User where id=#{id}")
     UserDO findUserById(int id);
-=======
->>>>>>> 161036aa6be2789df3ec10102fbe656a648337dc
 }

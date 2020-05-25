@@ -56,18 +56,6 @@ public interface ProjectMapper {
     @Select("select * from Project where author=#{author}")
     List<ProjectDO> getProjectByAuthor(String author);
 
-    @Update("update Project set isChecked=#{isChecked}")
-    ProjectDO checkProject(boolean isChecked);
-
-    @Update("update Project set isFinished=#{isFinished}")
-    ProjectDO finishProject(boolean isFinished);
-
-    @Update("update Project set isEnded=#{isEnded}")
-    ProjectDO endProject(boolean isEnded);
-
-    @Update("update Project set currentMoney=#{currentMoney}")
-    ProjectDO updateMoney(double currentMoney);
-
     @Select("select * from Project where name like #{name}")
     List<ProjectDO> getProjectByName(String name);
 

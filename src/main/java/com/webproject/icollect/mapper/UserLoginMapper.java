@@ -12,7 +12,7 @@ public interface UserLoginMapper {
     @Select("select * from User where id=#{id}")
     UserDO findUserById(int id);
 
-    @Select("select * from User where uid=#{username}")
+    @Select("select * from User where username=#{username}")
     UserDO findUserByUsername(String username);
 
     @Insert("insert IGNORE into User(username,password,role,avatar) values(#{username},#{password},#{role},#{avatar})")
