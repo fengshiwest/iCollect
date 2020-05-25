@@ -2,7 +2,9 @@ package com.webproject.icollect.service.impl;
 
 import com.webproject.icollect.mapper.CommentMapper;
 import com.webproject.icollect.pojo.CommentDO;
+
 import com.webproject.icollect.pojo.UserDO;
+
 import com.webproject.icollect.service.CommentService;
 
 
@@ -36,8 +38,10 @@ public class CommentServiceImpl implements CommentService {
         commentMapper.deleteComment(cid);
     }
 
+
     @Override
     public UserDO getUserToken(int id) {
         return commentMapper.findUserById(id);
     }
+
 }

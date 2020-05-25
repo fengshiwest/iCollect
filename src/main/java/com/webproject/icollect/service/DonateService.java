@@ -1,7 +1,9 @@
 package com.webproject.icollect.service;
 
 import com.webproject.icollect.pojo.DonateDO;
+
 import com.webproject.icollect.pojo.UserDO;
+
 
 import java.util.List;
 
@@ -18,5 +20,7 @@ public interface DonateService {
 
     void addDonation(DonateDO donateDO);
 
+
     UserDO getUserToken(int id);
+
 }

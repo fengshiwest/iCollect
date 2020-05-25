@@ -1,10 +1,16 @@
 package com.webproject.icollect;
 
-import com.webproject.icollect.controller.CommentController;
+
+
 import com.webproject.icollect.pojo.CommentDO;
 import com.webproject.icollect.pojo.DonateDO;
 import com.webproject.icollect.pojo.UserDO;
 import com.webproject.icollect.pojo.vo.ResultVO;
+
+import com.webproject.icollect.pojo.CommentDO;
+import com.webproject.icollect.pojo.DonateDO;
+import com.webproject.icollect.pojo.UserDO;
+
 import com.webproject.icollect.service.CommentService;
 import com.webproject.icollect.service.DonateService;
 import com.webproject.icollect.service.LoginService;
@@ -45,11 +51,19 @@ class IcollectApplicationTests {
 
     @Test
     void testUser(){
+
         UserDO user = new UserDO("user4","12345");
         UserDO userDO = loginService.userRegister(user);
         System.out.println(userDO);
         userDO = loginService.getUserInfo(10);
         System.out.println(userDO);
+
+//        UserDO user = new UserDO("user4","12345");
+//        UserDO userDO = loginService.userRegister(user);
+//        System.out.println(userDO);
+//        userDO = loginService.getUserInfo(10);
+//        System.out.println(userDO);
+
     }
 
 
@@ -59,6 +73,7 @@ class IcollectApplicationTests {
 //        comment.setCid("123");
 //        comment.setCtime("123");
 //        commentService.addComment(comment);
+
         UserDO user = new UserDO(1,"user","123456",1,"de.jpg");
         String token = TokenUtil.getToken(user);
         System.out.println(token);
@@ -73,6 +88,11 @@ class IcollectApplicationTests {
         //System.out.println(commentDO);
 
 
+
+
+//        List<CommentDO> commentDO = commentService.getCommentByTime("2");
+//        System.out.println(commentDO);
+
     }
 
     @Test
@@ -81,6 +101,7 @@ class IcollectApplicationTests {
 //        donate.setDtime("2020-05-17 23:11:56");
 //        donate.setDid("20200517231156");
 //        donateService.addDonation(donate);
+
 
         List<DonateDO> donateDOList1 = donateService.getDonationByProject("1");
         System.out.println(donateDOList1.get(0).getDid());
@@ -98,6 +119,16 @@ class IcollectApplicationTests {
         donateDO.setDid("1111");
         donateDO.setDtime("2020-05-17 23:11:56");
         donateService.addDonation(donateDO);
+
+//        List<DonateDO> donateDOList1 = donateService.getDonationByProject("1");
+//        System.out.println(donateDOList1.get(0).getDid());
+//
+//        List<DonateDO> donateDOList2 = donateService.getDonationByDonor("小明");
+//        System.out.println(donateDOList2.get(0).getDid());
+//
+//        List<DonateDO> donateDOList3 = donateService.getDonationByDonee("小红");
+//        System.out.println(donateDOList3.get(0).getDid());
+
 
     }
 

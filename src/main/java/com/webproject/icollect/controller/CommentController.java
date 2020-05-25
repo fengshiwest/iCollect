@@ -4,6 +4,7 @@ package com.webproject.icollect.controller;
  * Created by Wan Yu on 2020/5/18
  */
 
+
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.webproject.icollect.pojo.CommentDO;
@@ -19,6 +20,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.webproject.icollect.pojo.CommentDO;
+import com.webproject.icollect.pojo.vo.ResultVO;
+import com.webproject.icollect.service.CommentService;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -42,6 +54,7 @@ public class CommentController {
         List<CommentDO> commentList = commentService.getCommentByTime(pid);
         return new ResultVO<>(200,"success",commentList);
     }
+
 
     //如果不用get方式访问addComment可把这个方法和对应的commentService等内容删除
     public ResponseEntity<Object> getUserToken(String token){
@@ -86,9 +99,7 @@ public class CommentController {
         else{
             return new ResultVO<Object>(400,"未登录",null);
         }
-
     }
-
     @PostMapping("/deleteComment")
     public ResultVO<Object> deleteComment(@RequestParam("cid") String cid){
         commentService.deleteComment(cid);

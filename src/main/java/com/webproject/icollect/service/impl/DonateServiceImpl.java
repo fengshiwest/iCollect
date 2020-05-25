@@ -2,7 +2,9 @@ package com.webproject.icollect.service.impl;
 
 import com.webproject.icollect.mapper.DonateMapper;
 import com.webproject.icollect.pojo.DonateDO;
+
 import com.webproject.icollect.pojo.UserDO;
+
 import com.webproject.icollect.service.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +40,10 @@ public class DonateServiceImpl implements DonateService {
         donateMapper.addDonation(donateDO);
     }
 
+
     @Override
     public UserDO getUserToken(int id) {
         return donateMapper.findUserById(id);
     }
+
 }

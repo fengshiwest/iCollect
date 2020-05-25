@@ -1,5 +1,6 @@
 package com.webproject.icollect.controller;
 
+
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.webproject.icollect.pojo.DonateDO;
@@ -11,7 +12,14 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import com.webproject.icollect.pojo.DonateDO;
+import com.webproject.icollect.pojo.vo.ResultVO;
+import com.webproject.icollect.service.DonateService;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -52,6 +60,7 @@ public class DonateController {
         return new ResultVO<>(200,"success",donateList);
     }
 
+
     //如果不用get方式访问addDonation可把这个方法和对应的donationService等内容删除
     public ResponseEntity<Object> getUserToken(@RequestHeader("token") String token){
 //        String token = request.getHeader("token");
@@ -70,6 +79,7 @@ public class DonateController {
         }
 
     }
+
 
     @PostMapping("addDonation")
     public ResultVO<Object> addDonation(@RequestParam("pid") String pid,
@@ -118,6 +128,7 @@ public class DonateController {
 //        else{
 //            return new ResultVO<Object>(400,"未登录",null);
 //        }
+
     }
 
     //获取时间
