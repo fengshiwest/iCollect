@@ -6,6 +6,12 @@ logs/
 !**/src/main/**
 !**/src/test/**
 
+### Maven ###
+*.iml
+mvnw
+mvnw.cmd
+pom.xml
+
 ### STS ###
 .apt_generated
 .classpath

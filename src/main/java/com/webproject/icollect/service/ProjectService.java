@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProjectService {
 
     // add project
-    void addProject(ProjectDO projectDO);
+    ProjectDO addProject(ProjectDO projectDO);
 
     // delete project
     void deleteProject(String pid);
