@@ -19,8 +19,7 @@ public class ProjectController {
 
     @PostMapping("/add")
     public ResultVO<Object> addProject(@RequestBody ProjectDO projectDO) {
-        projectService.addProject(projectDO);
-        return new ResultVO<>(200, "success", null);
+        return new ResultVO<>(200, "success", projectService.addProject(projectDO));
     }
 
     @GetMapping("/delete")

@@ -18,15 +18,15 @@ import java.util.List;
 @Repository
 public interface ProjectMapper {
 
-    @Insert("insert into Project(pid,authorID,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode) " +
-            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode})")
+    @Insert("insert into Project(pid,authorID,author,name,introduction,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded) " +
+            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded})")
     void addProject(ProjectDO projectDO);
 
     @Delete("delete from Project where pid=#{pid}")
     void deleteProject(String pid);
 
-    @Update("update Project set name=#{name}, introduction=#{introduction},image=#{image}, startTime=#{startTime}, endTime=#{endTime}," +
-            " targetMoney=#{targetMoney}, isEnded=#{isEnded}, qrCode=#{qrCode} where pid=#{pid}")
+    @Update("update Project set name=#{name}, introduction=#{introduction}, startTime=#{startTime}, endTime=#{endTime}," +
+            " targetMoney=#{targetMoney}, isEnded=#{isEnded} where pid=#{pid}")
     void updateProject(ProjectDO projectDO);
 
     @Update("update Project set isChecked=#{isChecked} where pid=#{pid}")
@@ -40,6 +40,12 @@ public interface ProjectMapper {
 
     @Update("update Project set currentMoney=#{currentMoney} where pid=#{pid}")
     void updateMoney(double currentMoney, String pid);
+
+    @Update("update Project set image=#{image} where pid=#{pid}")
+    void setImage(String image, String pid);
+
+    @Update("update Project set qrCode=#{qrCode} where pid=#{pid}")
+    void setQrCode(String qrCode, String pid);
 
     @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User")
     List<ProjectDO> getProject();

@@ -16,9 +16,10 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectMapper projectMapper;
 
     @Override
-    public void addProject(ProjectDO projectDO) {
+    public ProjectDO addProject(ProjectDO projectDO) {
         projectDO.setPid(getUUID());
         projectMapper.addProject(projectDO);
+        return projectMapper.getProjectInfo(projectDO.getPid());
     }
 
     @Override
