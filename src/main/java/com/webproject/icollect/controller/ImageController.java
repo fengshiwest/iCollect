@@ -41,7 +41,7 @@ public class ImageController {
         return new ResultVO<>(200, "success", null);
     }
 
-    @GetMapping("/get/{type}/{id}/{imgName}")
+    @GetMapping("/delete/{type}/{id}/{imgName}")
     public ResultVO<Object> delete(@PathVariable("type") String type,
                        @PathVariable("id") String id,
                        @PathVariable("imgName") String imgName) {
