@@ -1,14 +1,11 @@
 package com.webproject.icollect.mapper;
 
 import com.webproject.icollect.pojo.ProjectDO;
-<<<<<<< HEAD
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-=======
 import org.apache.ibatis.annotations.*;
->>>>>>> 161036aa6be2789df3ec10102fbe656a648337dc
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,8 +18,6 @@ import java.util.List;
 @Repository
 public interface ProjectMapper {
 
-<<<<<<< HEAD
-=======
     @Insert("insert into Project(pid,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode) " +
             "values(#{pid},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode})")
     void addProject(ProjectDO projectDO);
@@ -55,20 +50,11 @@ public interface ProjectMapper {
     @Select("select * from Project where isChecked=true")
     List<ProjectDO> getProjectChecked();
 
->>>>>>> 161036aa6be2789df3ec10102fbe656a648337dc
     @Select("select * from Project where pid=#{pid}")
     ProjectDO getProjectInfo(String pid);
 
     @Select("select * from Project where author=#{author}")
     List<ProjectDO> getProjectByAuthor(String author);
-
-<<<<<<< HEAD
-    @Select("select * from Project where name=#{name}")
-    List<ProjectDO> getProjectByName(String name);
-
-    @Insert("insert into Project(pid,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode) " +
-            "values(#{pid},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode})")
-    void addProject(ProjectDO projectDO);
 
     @Update("update Project set isChecked=#{isChecked}")
     ProjectDO checkProject(boolean isChecked);
@@ -81,9 +67,8 @@ public interface ProjectMapper {
 
     @Update("update Project set currentMoney=#{currentMoney}")
     ProjectDO updateMoney(double currentMoney);
-=======
+
     @Select("select * from Project where name like #{name}")
     List<ProjectDO> getProjectByName(String name);
 
->>>>>>> 161036aa6be2789df3ec10102fbe656a648337dc
 }
