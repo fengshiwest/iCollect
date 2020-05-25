@@ -75,22 +75,32 @@ public class CommentController {
 
 
     @PostMapping("/addComment")
-    public ResultVO<Object> addComment(@RequestParam("pid") String pid,
-                                       @RequestParam("content") String content,
-                                       @RequestHeader("token") String token
+    public ResultVO<Object> addComment(/*@RequestParam("pid") String pid,
+                                       @RequestParam("content") String content,*/
+                                       @RequestHeader("token") String token,
+                                       @RequestBody CommentDO commentDO
                                        ){
         //先验证用户的token是否存在，即保证用户在登录的情况下添加评论
         if(token != null){
             String uid;
             try {
+
                 uid = TokenUtil.verifyToken(token).get("id");
-                CommentDO commentDO = new CommentDO(pid,uid,content);
-                String cid = getUUID();
-                commentDO.setCid(cid);
-                String ctime = getTime();
-                commentDO.setCtime(ctime);
-                commentService.addComment(commentDO);
-                return new ResultVO<>(200, "success", commentDO);
+                //CommentDO commentDO = new CommentDO(pid,uid,content);
+                //如果采用json格式传递一个commentDo对象过来，其本身就携带着该用户的uid，判断是否登录就只能看token是否为空
+                //因此这里额外添加一个条件比较token中的id字段和commentDo的uid字段值是否相同，相同才继续执行
+                if(commentDO.getUid() == uid){
+                    String cid = getUUID();
+                    commentDO.setCid(cid);
+                    String ctime = getTime();
+                    commentDO.setCtime(ctime);
+                    commentService.addComment(commentDO);
+                    return new ResultVO<>(200, "success", commentDO);
+                }
+                else{
+                    return new ResultVO<Object>(400,"未登录",null);
+                }
+
             }catch (SignatureVerificationException | JWTDecodeException e){
                 return new ResultVO<Object>(400,"未登录",null);
             }
@@ -101,8 +111,8 @@ public class CommentController {
         }
     }
     @PostMapping("/deleteComment")
-    public ResultVO<Object> deleteComment(@RequestParam("cid") String cid){
-        commentService.deleteComment(cid);
+    public ResultVO<Object> deleteComment(/*@RequestParam("cid") String cid*/@RequestBody CommentDO commentDO){
+        commentService.deleteComment(commentDO.getCid());
 
         return new ResultVO<>(200,"success",null);
 

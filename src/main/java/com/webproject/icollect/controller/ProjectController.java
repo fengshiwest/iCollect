@@ -19,8 +19,7 @@ public class ProjectController {
 
     @PostMapping("/add")
     public ResultVO<Object> addProject(@RequestBody ProjectDO projectDO) {
-        projectService.addProject(projectDO);
-        return new ResultVO<>(200, "success", null);
+        return new ResultVO<>(200, "success", projectService.addProject(projectDO));
     }
 
     @GetMapping("/delete")
@@ -62,6 +61,11 @@ public class ProjectController {
     @GetMapping("/getByName")
     public ResultVO<Object> getProjectByName(@RequestParam("name") String name) {
         return new ResultVO<>(200, "success", projectService.getProjectByName(name));
+    }
+
+    @GetMapping("/getByCategory")
+    public ResultVO<Object> getProjectByCategory(@RequestParam("category") String category) {
+        return new ResultVO<>(200, "success", projectService.getProjectByCategory(category));
     }
 
     @GetMapping("/check")

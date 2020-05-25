@@ -82,16 +82,19 @@ public class DonateController {
 
 
     @PostMapping("addDonation")
-    public ResultVO<Object> addDonation(@RequestParam("pid") String pid,
+    public ResultVO<Object> addDonation(/*@RequestParam("pid") String pid,
                                         @RequestParam("donor") String donor,
                                         @RequestParam("donee") String donee,
-                                        @RequestParam("money") String moneyValue,
+                                        @RequestParam("money") String moneyValue,*/
+                                        @RequestBody DonateDO donateDO,
                                         @RequestHeader("token") String token
                                         ){
 //原不带token的方法
         try{
-            double money = Double.parseDouble(moneyValue);
-            DonateDO donateDO = new DonateDO(pid,donor,donee,money);
+            //donateDo的money是Double类型，和原本的moneyValue不同，修改时需要注意
+            //double money = Double.parseDouble(moneyValue);
+            //DonateDO donateDO = new DonateDO(pid,donor,donee,money);
+
             String did = getUUID();
             donateDO.setDid(did);
             String dtime = getTime();

@@ -16,9 +16,10 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectMapper projectMapper;
 
     @Override
-    public void addProject(ProjectDO projectDO) {
+    public ProjectDO addProject(ProjectDO projectDO) {
         projectDO.setPid(getUUID());
         projectMapper.addProject(projectDO);
+        return projectMapper.getProjectInfo(projectDO.getPid());
     }
 
     @Override
@@ -63,6 +64,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectDO> getProjectByName(String name) {
         return projectMapper.getProjectByName("%"+name+"%");
+    }
+
+    @Override
+    public List<ProjectDO> getProjectByCategory(String category) {
+        return projectMapper.getProjectByCategory(category);
     }
 
     @Override

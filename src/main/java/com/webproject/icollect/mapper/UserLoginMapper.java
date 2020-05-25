@@ -4,6 +4,7 @@ import com.webproject.icollect.pojo.UserDO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Mapper
@@ -18,4 +19,6 @@ public interface UserLoginMapper {
     @Insert("insert IGNORE into User(username,password,role,avatar) values(#{username},#{password},#{role},#{avatar})")
     void insertUserIgnore(UserDO user);
 
+    @Update("update User set avatar=#{avatar} where username=#{username}")
+    void setAvatar(String avatar, String username);
 }
