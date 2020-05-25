@@ -3,19 +3,19 @@ package com.webproject.icollect.pojo;
 
 public class ProjectDO {
 
-  private String pid;
-  private String author;
-  private String name;
-  private String introduction;
-  private String image;
-  private String startTime;
-  private String endTime;
+  private String pid = "";
+  private String author = "";
+  private String name = "";
+  private String introduction  = "";
+  private String image  = "";
+  private String startTime  = "";
+  private String endTime  = "";
   private double targetMoney;
   private double currentMoney;
-  private long isFinished;
-  private long isChecked;
-  private long isEnded;
-  private String qrCode;
+  private boolean isFinished;
+  private boolean isChecked;
+  private boolean isEnded;
+  private String qrCode = "";
 
 
   public String getPid() {
@@ -99,29 +99,29 @@ public class ProjectDO {
   }
 
 
-  public long getIsFinished() {
+  public boolean getIsFinished() {
     return isFinished;
   }
 
-  public void setIsFinished(long isFinished) {
+  public void setIsFinished(boolean isFinished) {
     this.isFinished = isFinished;
   }
 
 
-  public long getIsChecked() {
+  public boolean getIsChecked() {
     return isChecked;
   }
 
-  public void setIsChecked(long isChecked) {
+  public void setIsChecked(boolean isChecked) {
     this.isChecked = isChecked;
   }
 
 
-  public long getIsEnded() {
+  public boolean getIsEnded() {
     return isEnded;
   }
 
-  public void setIsEnded(long isEnded) {
+  public void setIsEnded(boolean isEnded) {
     this.isEnded = isEnded;
   }
 
