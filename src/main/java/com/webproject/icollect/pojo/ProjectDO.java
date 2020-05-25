@@ -5,6 +5,7 @@ public class ProjectDO {
 
 
   private String pid = "";
+  private int authorID;
   private String author = "";
   private String name = "";
   private String introduction  = "";
@@ -18,8 +19,6 @@ public class ProjectDO {
   private boolean isEnded;
   private String qrCode = "";
 
-
-
   public String getPid() {
     return pid;
   }
@@ -28,6 +27,13 @@ public class ProjectDO {
     this.pid = pid;
   }
 
+  public int getAuthorID() {
+    return authorID;
+  }
+
+  public void setAuthorID(int authorID) {
+    this.authorID = authorID;
+  }
 
   public String getAuthor() {
     return author;
@@ -37,7 +43,6 @@ public class ProjectDO {
     this.author = author;
   }
 
-
   public String getName() {
     return name;
   }
@@ -45,7 +50,6 @@ public class ProjectDO {
   public void setName(String name) {
     this.name = name;
   }
-
 
   public String getIntroduction() {
     return introduction;
@@ -55,7 +59,6 @@ public class ProjectDO {
     this.introduction = introduction;
   }
 
-
   public String getImage() {
     return image;
   }
@@ -63,7 +66,6 @@ public class ProjectDO {
   public void setImage(String image) {
     this.image = image;
   }
-
 
   public String getStartTime() {
     return startTime;
@@ -73,7 +75,6 @@ public class ProjectDO {
     this.startTime = startTime;
   }
 
-
   public String getEndTime() {
     return endTime;
   }
@@ -81,7 +82,6 @@ public class ProjectDO {
   public void setEndTime(String endTime) {
     this.endTime = endTime;
   }
-
 
   public double getTargetMoney() {
     return targetMoney;
@@ -91,7 +91,6 @@ public class ProjectDO {
     this.targetMoney = targetMoney;
   }
 
-
   public double getCurrentMoney() {
     return currentMoney;
   }
@@ -100,44 +99,29 @@ public class ProjectDO {
     this.currentMoney = currentMoney;
   }
 
-
-
-
-
-
   public boolean getIsFinished() {
     return isFinished;
   }
 
-  public void setIsFinished(boolean isFinished) {
-
-    this.isFinished = isFinished;
+  public void setIsFinished(boolean finished) {
+    isFinished = finished;
   }
-
-
-
 
   public boolean getIsChecked() {
     return isChecked;
   }
 
-  public void setIsChecked(boolean isChecked) {
-
-    this.isChecked = isChecked;
+  public void setIsChecked(boolean checked) {
+    isChecked = checked;
   }
-
-
-
 
   public boolean getIsEnded() {
     return isEnded;
   }
 
-  public void setIsEnded(boolean isEnded) {
-
-    this.isEnded = isEnded;
+  public void setIsEnded(boolean ended) {
+    isEnded = ended;
   }
-
 
   public String getQrCode() {
     return qrCode;
@@ -146,5 +130,4 @@ public class ProjectDO {
   public void setQrCode(String qrCode) {
     this.qrCode = qrCode;
   }
-
 }

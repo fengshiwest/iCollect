@@ -18,8 +18,8 @@ import java.util.List;
 @Repository
 public interface ProjectMapper {
 
-    @Insert("insert into Project(pid,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode) " +
-            "values(#{pid},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode})")
+    @Insert("insert into Project(pid,authorID,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode) " +
+            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode})")
     void addProject(ProjectDO projectDO);
 
     @Delete("delete from Project where pid=#{pid}")
@@ -41,22 +41,22 @@ public interface ProjectMapper {
     @Update("update Project set currentMoney=#{currentMoney} where pid=#{pid}")
     void updateMoney(double currentMoney, String pid);
 
-    @Select("select * from Project")
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User")
     List<ProjectDO> getProject();
 
-    @Select("select * from Project where isChecked=false")
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where isChecked=false")
     List<ProjectDO> getProjectUnchecked();
 
-    @Select("select * from Project where isChecked=true")
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where isChecked=true")
     List<ProjectDO> getProjectChecked();
 
-    @Select("select * from Project where pid=#{pid}")
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where pid=#{pid}")
     ProjectDO getProjectInfo(String pid);
 
-    @Select("select * from Project where author=#{author}")
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where author=#{author}")
     List<ProjectDO> getProjectByAuthor(String author);
 
-    @Select("select * from Project where name like #{name}")
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where name like #{name}")
     List<ProjectDO> getProjectByName(String name);
 
 }
