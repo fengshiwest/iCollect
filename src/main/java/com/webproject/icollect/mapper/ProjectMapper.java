@@ -18,15 +18,15 @@ import java.util.List;
 @Repository
 public interface ProjectMapper {
 
-    @Insert("insert into Project(pid,authorID,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode) " +
-            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode})")
+    @Insert("insert into Project(pid,authorID,author,name,introduction,image,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,qrCode,category) " +
+            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{image},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{qrCode},#{category})")
     void addProject(ProjectDO projectDO);
 
     @Delete("delete from Project where pid=#{pid}")
     void deleteProject(String pid);
 
     @Update("update Project set name=#{name}, introduction=#{introduction},image=#{image}, startTime=#{startTime}, endTime=#{endTime}," +
-            " targetMoney=#{targetMoney}, isEnded=#{isEnded}, qrCode=#{qrCode} where pid=#{pid}")
+            " targetMoney=#{targetMoney}, isEnded=#{isEnded}, qrCode=#{qrCode},category=#{category} where pid=#{pid}")
     void updateProject(ProjectDO projectDO);
 
     @Update("update Project set isChecked=#{isChecked} where pid=#{pid}")
@@ -58,5 +58,8 @@ public interface ProjectMapper {
 
     @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where name like #{name}")
     List<ProjectDO> getProjectByName(String name);
+
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where category like #{category}")
+    List<ProjectDO> getProjectByCategory(String category);
 
 }

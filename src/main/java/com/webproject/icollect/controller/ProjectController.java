@@ -64,6 +64,11 @@ public class ProjectController {
         return new ResultVO<>(200, "success", projectService.getProjectByName(name));
     }
 
+    @GetMapping("/getByCategory")
+    public ResultVO<Object> getProjectByCategory(@RequestParam("category") String category) {
+        return new ResultVO<>(200, "success", projectService.getProjectByCategory(category));
+    }
+
     @GetMapping("/check")
     public ResultVO<Object> checkProject(@RequestParam("isChecked") boolean isChecked,
                                          @RequestParam("pid") String pid) {
