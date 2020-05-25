@@ -18,6 +18,7 @@ public class ProjectDO {
   private boolean isChecked;
   private boolean isEnded;
   private String qrCode = "";
+  private String category;
 
   public String getPid() {
     return pid;
@@ -129,5 +130,13 @@ public class ProjectDO {
 
   public void setQrCode(String qrCode) {
     this.qrCode = qrCode;
+  }
+
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
   }
 }

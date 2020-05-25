@@ -33,6 +33,8 @@ public interface ProjectService {
     // get by project name
     List<ProjectDO> getProjectByName(String name);
 
+    List<ProjectDO> getProjectByCategory(String category);
+
     // check project
     void checkProject(boolean isChecked, String pid);
 

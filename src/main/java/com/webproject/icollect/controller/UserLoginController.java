@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 @Api("用户登陆注册")
@@ -58,4 +60,5 @@ public class UserLoginController {
         String token = TokenUtil.getToken(user);
         return new ResultVO<>(200,"success",new LoginVO<UserDO>(token,user));
     }
+
 }

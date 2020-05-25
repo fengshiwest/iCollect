@@ -18,15 +18,17 @@ import java.util.List;
 @Repository
 public interface ProjectMapper {
 
-    @Insert("insert into Project(pid,authorID,author,name,introduction,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded) " +
-            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded})")
+
+    @Insert("insert into Project(pid,authorID,author,name,introduction,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,category) " +
+            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{category)")
+
     void addProject(ProjectDO projectDO);
 
     @Delete("delete from Project where pid=#{pid}")
     void deleteProject(String pid);
 
     @Update("update Project set name=#{name}, introduction=#{introduction}, startTime=#{startTime}, endTime=#{endTime}," +
-            " targetMoney=#{targetMoney}, isEnded=#{isEnded} where pid=#{pid}")
+            " targetMoney=#{targetMoney}, isEnded=#{isEnded},category=#{category} where pid=#{pid}")
     void updateProject(ProjectDO projectDO);
 
     @Update("update Project set isChecked=#{isChecked} where pid=#{pid}")
@@ -64,5 +66,8 @@ public interface ProjectMapper {
 
     @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where name like #{name}")
     List<ProjectDO> getProjectByName(String name);
+
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where category like #{category}")
+    List<ProjectDO> getProjectByCategory(String category);
 
 }

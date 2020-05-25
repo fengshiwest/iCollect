@@ -67,6 +67,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<ProjectDO> getProjectByCategory(String category) {
+        return projectMapper.getProjectByCategory(category);
+    }
+
+    @Override
     public void checkProject(boolean isChecked, String pid) {
         projectMapper.checkProject(isChecked, pid);
     }
