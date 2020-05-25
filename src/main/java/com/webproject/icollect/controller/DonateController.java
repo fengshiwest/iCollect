@@ -90,47 +90,49 @@ public class DonateController {
                                         @RequestHeader("token") String token
                                         ){
 //原不带token的方法
-        try{
-            //donateDo的money是Double类型，和原本的moneyValue不同，修改时需要注意
-            //double money = Double.parseDouble(moneyValue);
-            //DonateDO donateDO = new DonateDO(pid,donor,donee,money);
-
-            String did = getUUID();
-            donateDO.setDid(did);
-            String dtime = getTime();
-            donateDO.setDtime(dtime);
-            donateService.addDonation(donateDO);
-            return new ResultVO<>(200, "success", donateDO);
-        }
-        catch(NumberFormatException e){
-            return new ResultVO<>(403,"金额有误",null);
-        }
-
-
-//        if(token != null){
-//            //带上token后删除形参中的donor
-//            String donor;
-//            try{
-//                donor = TokenUtil.verifyToken(token).get("id");
-//                double money = Double.parseDouble(moneyValue);
-//                DonateDO donateDO = new DonateDO(pid,donor,donee,money);
-//                String did = getUUID();
-//                donateDO.setDid(did);
-//                String dtime = getTime();
-//                donateDO.setDtime(dtime);
-//                donateService.addDonation(donateDO);
-//                return new ResultVO<>(200, "success", donateDO);
-//            }
-//            catch (SignatureVerificationException | JWTDecodeException e){
-//                return new ResultVO<Object>(400,"未登录",null);
-//            }
-//            catch (NumberFormatException e){
-//                return new ResultVO<>(403,"金额有误",null);
-//            }
+//        try{
+//            //donateDo的money是Double类型，和原本的moneyValue不同，修改时需要注意
+//            //double money = Double.parseDouble(moneyValue);
+//            //DonateDO donateDO = new DonateDO(pid,donor,donee,money);
+//
+//            String did = getUUID();
+//            donateDO.setDid(did);
+//            String dtime = getTime();
+//            donateDO.setDtime(dtime);
+//
+//            donateService.addDonation(donateDO);
+//            return new ResultVO<>(200, "success", donateDO);
 //        }
-//        else{
-//            return new ResultVO<Object>(400,"未登录",null);
+//        catch(NumberFormatException e){
+//            return new ResultVO<>(403,"金额有误",null);
 //        }
+
+
+        if(token != null){
+            try{
+
+                String did = getUUID();
+                donateDO.setDid(did);
+                String donor = TokenUtil.verifyToken(token).get("id");
+                donateDO.setDonor(donor);
+
+                String dtime = getTime();
+                donateDO.setDtime(dtime);
+
+
+                donateService.addDonation(donateDO);
+                return new ResultVO<>(200, "success", donateDO);
+            }
+            catch (SignatureVerificationException | JWTDecodeException e){
+                return new ResultVO<Object>(400,"未登录",null);
+            }
+            catch (NumberFormatException e){
+                return new ResultVO<>(403,"金额有误",null);
+            }
+        }
+        else{
+            return new ResultVO<Object>(400,"未登录",null);
+        }
 
     }
 

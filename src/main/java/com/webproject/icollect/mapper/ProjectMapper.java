@@ -20,7 +20,7 @@ public interface ProjectMapper {
 
 
     @Insert("insert into Project(pid,authorID,author,name,introduction,startTime,endTime,targetMoney,currentMoney,isFinished,isChecked,isEnded,category) " +
-            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{category)")
+            "values(#{pid},#{authorID},#{author},#{name},#{introduction},#{startTime},#{endTime},#{targetMoney},#{currentMoney},#{isFinished},#{isChecked},#{isEnded},#{category})")
     void addProject(ProjectDO projectDO);
 
     @Delete("delete from Project where pid=#{pid}")
