@@ -80,7 +80,7 @@ class IcollectApplicationTests {
         String uid = TokenUtil.verifyToken(token).get("id");
         List<CommentDO> commentDO = commentService.getCommentByTime("1");
         CommentDO cd = new CommentDO("1",uid,"hello world");
-        String cid = "33";
+        String cid = "66";
         cd.setCid(cid);
         String ctime = "2";
         cd.setCtime(ctime);
