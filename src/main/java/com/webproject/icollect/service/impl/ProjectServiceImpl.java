@@ -57,12 +57,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDO> getProjectByAuthor(String author) {
-        return getProjectByAuthor(author);
+        return projectMapper.getProjectByAuthor(author);
     }
 
     @Override
     public List<ProjectDO> getProjectByName(String name) {
-        return getProjectByName(name);
+        return projectMapper.getProjectByName("%"+name+"%");
     }
 
     @Override

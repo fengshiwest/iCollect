@@ -46,8 +46,7 @@ public class ProjectController {
 
     @GetMapping("/getChecked")
     public ResultVO<Object> getProjectChecked(){
-        List<ProjectDO> projects = projectService.getProjectChecked();
-        return new ResultVO<>(200, "success", projects);
+        return new ResultVO<>(200, "success", projectService.getProjectChecked());
     }
 
     @GetMapping("/getByPid")

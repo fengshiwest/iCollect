@@ -22,7 +22,7 @@ public interface ProjectMapper {
     void deleteProject(String pid);
 
     @Update("update Project set name=#{name}, introduction=#{introduction},image=#{image}, startTime=#{startTime}, endTime=#{endTime}," +
-            " targetMoney=#{targetMoney}, isFinished=#{isFinished}, isEnded=#{isEnded}, qrCode=#{qrCode} where pid=#{pid}")
+            " targetMoney=#{targetMoney}, isEnded=#{isEnded}, qrCode=#{qrCode} where pid=#{pid}")
     void updateProject(ProjectDO projectDO);
 
     @Update("update Project set isChecked=#{isChecked} where pid=#{pid}")
@@ -52,7 +52,7 @@ public interface ProjectMapper {
     @Select("select * from Project where author=#{author}")
     List<ProjectDO> getProjectByAuthor(String author);
 
-    @Select("select * from Project where name=#{name}")
+    @Select("select * from Project where name like #{name}")
     List<ProjectDO> getProjectByName(String name);
 
 }
