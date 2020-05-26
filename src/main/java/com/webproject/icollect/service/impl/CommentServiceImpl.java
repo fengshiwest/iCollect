@@ -24,8 +24,13 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper commentMapper;
 
     @Override
-    public List<CommentDO> getCommentByTime(String pid) {
-        return commentMapper.getCommendByTime(pid);
+    public List<CommentDO> getCommentByPid(String pid) {
+        return commentMapper.getCommentByPid(pid);
+    }
+
+    @Override
+    public List<CommentDO> getCommentByUid(int uid) {
+        return commentMapper.getCommentByUid(uid);
     }
 
     @Override

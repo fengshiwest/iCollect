@@ -72,6 +72,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<ProjectDO> getProjectDonated(int donor) {
+        return projectMapper.getProjectDonated(donor);
+    }
+
+    @Override
     public void checkProject(boolean isChecked, String pid) {
         projectMapper.checkProject(isChecked, pid);
     }

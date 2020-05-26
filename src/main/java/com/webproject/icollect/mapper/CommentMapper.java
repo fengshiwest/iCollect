@@ -19,8 +19,11 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CommentMapper {
-    @Select("select * from Comment where pid=#{pid}")
-    List<CommentDO> getCommendByTime(String pid);
+    @Select("select * from Comment NATURAL JOIN (select username, id as uid from User) as User where pid=#{pid}")
+    List<CommentDO> getCommentByPid(String pid);
+
+    @Select("select * from Comment NATURAL JOIN (select username, id as uid from User) as User where uid=#{uid}")
+    List<CommentDO> getCommentByUid(int uid);
 
     @Insert("insert into Comment(cid,ctime,pid,uid,content) values(#{cid},#{ctime},#{pid},#{uid},#{content})")
     void addComment(CommentDO comment);
@@ -30,5 +33,4 @@ public interface CommentMapper {
 
     @Select("select * from User where id=#{id}")
     UserDO findUserById(int id);
-
 }

@@ -1,8 +1,11 @@
 package com.webproject.icollect.controller;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.webproject.icollect.pojo.ProjectDO;
 import com.webproject.icollect.pojo.vo.ResultVO;
 import com.webproject.icollect.service.ProjectService;
+import com.webproject.icollect.utils.TokenUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +69,19 @@ public class ProjectController {
     @GetMapping("/getByCategory")
     public ResultVO<Object> getProjectByCategory(@RequestParam("category") String category) {
         return new ResultVO<>(200, "success", projectService.getProjectByCategory(category));
+    }
+
+    @GetMapping("/getDonated")
+    public ResultVO<Object> getDonated(@RequestHeader("token") String token){
+        if(token == null)
+            return new ResultVO<>(400, "未登录", null);
+        int donor;
+        try{
+            donor = Integer.valueOf(TokenUtil.verifyToken(token).get("id"));
+            return new ResultVO<>(200, "success", projectService.getProjectDonated(donor));
+        }catch (SignatureVerificationException | JWTDecodeException e){
+            return new ResultVO<>(400,"未登录",null);
+        }
     }
 
     @GetMapping("/check")
