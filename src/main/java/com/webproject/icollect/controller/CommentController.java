@@ -51,8 +51,21 @@ public class CommentController {
 
     @GetMapping("/getComment")
     public ResultVO<Object> getComment(@RequestParam("pid") String pid){
-        List<CommentDO> commentList = commentService.getCommentByTime(pid);
+        List<CommentDO> commentList = commentService.getCommentByPid(pid);
         return new ResultVO<>(200,"success",commentList);
+    }
+
+    @GetMapping("/getCommitByUid")
+    public ResultVO<Object> getCommitByUid(@RequestHeader("token") String token){
+        if(token == null)
+            return new ResultVO<>(400, "未登录", null);
+        int uid;
+        try{
+            uid = Integer.valueOf(TokenUtil.verifyToken(token).get("id"));
+            return new ResultVO<>(200, "success", commentService.getCommentByUid(uid));
+        }catch (SignatureVerificationException | JWTDecodeException e){
+            return new ResultVO<>(400,"未登录",null);
+        }
     }
 
 
@@ -82,9 +95,9 @@ public class CommentController {
                                        ){
         //先验证用户的token是否存在，即保证用户在登录的情况下添加评论
         if(token != null){
-            String uid;
+            int uid;
             try {
-                uid = TokenUtil.verifyToken(token).get("id");
+                uid = Integer.valueOf(TokenUtil.verifyToken(token).get("id"));
                 commentDO.setUid(uid);
                 String cid = getUUID();
                 commentDO.setCid(cid);
@@ -102,6 +115,7 @@ public class CommentController {
             return new ResultVO<Object>(400,"未登录",null);
         }
     }
+
     @PostMapping("/deleteComment")
     public ResultVO<Object> deleteComment(/*@RequestParam("cid") String cid*/@RequestBody CommentDO commentDO){
         commentService.deleteComment(commentDO.getCid());

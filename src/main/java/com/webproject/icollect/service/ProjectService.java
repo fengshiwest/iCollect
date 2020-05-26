@@ -35,6 +35,9 @@ public interface ProjectService {
 
     List<ProjectDO> getProjectByCategory(String category);
 
+    // get donated project
+    List<ProjectDO> getProjectDonated(int donor);
+
     // check project
     void checkProject(boolean isChecked, String pid);
 

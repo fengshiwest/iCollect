@@ -14,7 +14,11 @@ import java.util.List;
 
 public interface CommentService {
 
-    List<CommentDO> getCommentByTime(String pid);
+    List<CommentDO> getCommentByPid(String pid);
+
+
+    List<CommentDO> getCommentByUid(int uid);
+
 
     UserDO getUserToken(int id);
 

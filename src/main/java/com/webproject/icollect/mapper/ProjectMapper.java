@@ -69,4 +69,6 @@ public interface ProjectMapper {
     @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User where category like #{category}")
     List<ProjectDO> getProjectByCategory(String category);
 
+    @Select("select * from Project NATURAL JOIN (select id as authorID, username as author from User) as User NATURAL JOIN (select pid, donor from Donate where donor=#{donor}) as Donate")
+    List<ProjectDO> getProjectDonated(int donor);
 }
