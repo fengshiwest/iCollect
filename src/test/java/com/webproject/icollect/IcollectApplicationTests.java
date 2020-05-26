@@ -42,11 +42,16 @@ class IcollectApplicationTests {
     void testToken(){
         UserDO user = new UserDO(1,"user","123456",1,"de.jpg");
         String token = TokenUtil.getToken(user);
+        //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiMSIsImlzcyI6InN5c191c2VyIiwiaWQiOiIxIiwiZXhwIjoxNTkwNDk2NTkzLCJ1c2VybmFtZSI6InVzZXIifQ.NZxZzEGwh2-m9xUAWauynuihLKeS0Hdby6ntuhsumAI
         System.out.println(token);
         String s = TokenUtil.verifyToken(token).get("role");
         System.out.println(s);
         System.out.println(TokenUtil.verifyToken(token));
 //        System.out.println(new Date());
+    }
+    @Test
+    void testUserInfo(){
+
     }
 
     @Test

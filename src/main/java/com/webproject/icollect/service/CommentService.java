@@ -16,7 +16,6 @@ public interface CommentService {
 
     List<CommentDO> getCommentByTime(String pid);
 
-
     UserDO getUserToken(int id);
 
     void addComment(CommentDO comment);
