@@ -54,9 +54,9 @@ public class CommentController {
         List<CommentDO> commentList = commentService.getCommentByPid(pid);
         return new ResultVO<>(200,"success",commentList);
     }
-
-    @GetMapping("/getCommitByUid")
-    public ResultVO<Object> getCommitByUid(@RequestHeader("token") String token){
+    //用户的uid，需要从token中获取
+    @GetMapping("/getCommentByUid")
+    public ResultVO<Object> getCommentByUid(@RequestHeader("token") String token){
         if(token == null)
             return new ResultVO<>(400, "未登录", null);
         int uid;

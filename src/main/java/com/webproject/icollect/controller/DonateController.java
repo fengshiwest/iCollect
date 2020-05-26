@@ -47,11 +47,22 @@ public class DonateController {
         List<DonateDO> donateList = donateService.getDonationByProject(pid);
         return new ResultVO<>(200,"success",donateList);
     }
-
+    //donor相当于用户的uid，需要从token中获取
     @GetMapping("/getDonationByDonor")
-    public ResultVO<Object> getDonationByDonor(@RequestParam("donor") String donor) {
-        List<DonateDO> donateList = donateService.getDonationByDonor(donor);
-        return new ResultVO<>(200,"success",donateList);
+    public ResultVO<Object> getDonationByDonor(@RequestHeader String token) {
+        if(token != null){
+            String donor;
+            try{
+                donor = TokenUtil.verifyToken(token).get("id");
+                List<DonateDO> donateList = donateService.getDonationByDonor(donor);
+                return new ResultVO<>(200,"success",donateList);
+            }catch (SignatureVerificationException | JWTDecodeException e){
+                return new ResultVO<>(400,"未登录",null);
+            }
+        }
+        else{
+            return new ResultVO<>(400,"未登录",null);
+        }
     }
 
     @GetMapping("/getDonationByDonee")
@@ -125,9 +136,6 @@ public class DonateController {
             }
             catch (SignatureVerificationException | JWTDecodeException e){
                 return new ResultVO<Object>(400,"未登录",null);
-            }
-            catch (NumberFormatException e){
-                return new ResultVO<>(403,"金额有误",null);
             }
         }
         else{
