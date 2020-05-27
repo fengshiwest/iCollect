@@ -5,6 +5,7 @@ public class DonateDO {
 
   private String did;
   private String pid;
+  private String projectName;
   private int donor;
   private String donorName;
   private int donee;
@@ -14,9 +15,10 @@ public class DonateDO {
 
   public DonateDO(){}
 
-  public DonateDO(String did, String pid, int donor, int donee, String donorName, String doneeName, double money, String dtime){
+  public DonateDO(String did, String pid, String projectName, int donor, int donee, String donorName, String doneeName, double money, String dtime){
     this.did = did;
     this.pid = pid;
+    this.projectName = projectName;
     this.donor = donor;
     this.donee = donee;
     this.donorName = donorName;
@@ -45,6 +47,14 @@ public class DonateDO {
 
   public void setPid(String pid) { this.pid = pid; }
 
+  public String getProjectName() {
+    return projectName;
+  }
+
+  public void setProjectName(String projectName) {
+    this.projectName = projectName;
+  }
+
   public String getDtime() {
     return dtime;
   }
@@ -52,7 +62,6 @@ public class DonateDO {
   public void setDtime(String dtime) {
     this.dtime = dtime;
   }
-
 
   public int getDonor() {
     return donor;
