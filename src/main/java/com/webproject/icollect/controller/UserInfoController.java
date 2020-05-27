@@ -2,6 +2,8 @@ package com.webproject.icollect.controller;
 
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.webproject.icollect.pojo.DonateDO;
+import com.webproject.icollect.pojo.ProjectDO;
 import com.webproject.icollect.pojo.UserInfoDo;
 import com.webproject.icollect.pojo.vo.ResultVO;
 import com.webproject.icollect.service.UserInfoService;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @Api("用户信息")
@@ -55,6 +58,12 @@ public class UserInfoController {
             try{
                 uid = TokenUtil.verifyToken(token).get("id");
                 UserInfoDo userInfoDo = userInfoService.getUserInfoByid(uid);
+                //添加用户发起的项目信息对象
+                List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
+                userInfoDo.setCreatedProject(createdProject);
+                //添加用户参与的捐款信息对象
+                List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
+                userInfoDo.setDonationInfo(donationInfo);
                 return new ResultVO<>(200,"success",userInfoDo);
             }catch(SignatureVerificationException | JWTDecodeException e){
                 return new ResultVO<Object>(400,"未登录",null);

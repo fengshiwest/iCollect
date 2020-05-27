@@ -2,6 +2,8 @@ package com.webproject.icollect.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 @JsonIgnoreProperties(value = { "password"})
 public class UserDO {
     private int id;
@@ -9,6 +11,7 @@ public class UserDO {
     private String password;
     private int role = 1;
     private String avatar = "default.png";
+
 
     public UserDO(String username, String password) {
         this.username = username;

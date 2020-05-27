@@ -1,5 +1,7 @@
 package com.webproject.icollect.pojo;
 
+import java.util.List;
+
 public class UserInfoDo {
     //对应userinfo表的字段
     private String uid;
@@ -7,6 +9,8 @@ public class UserInfoDo {
     private String area;
     private String tel;
     private String description;
+    private List<ProjectDO> createdProject;
+    private List<DonateDO> donationInfo;
 
     public UserInfoDo(){
 
@@ -32,6 +36,21 @@ public class UserInfoDo {
     public UserInfoDo(String name,String tel){
         this.username = name;
         this.tel = tel;
+    }
+
+    public void setDonationInfo(List<DonateDO> dp){
+        this.donationInfo = dp;
+    }
+
+    public List<DonateDO> getDonationInfo(){
+        return this.donationInfo;
+    }
+
+    public void setCreatedProject(List<ProjectDO> cp){
+        this.createdProject = cp;
+    }
+    public List<ProjectDO> getCreatedProject(){
+        return this.createdProject;
     }
 
     public void setArea(String area){

@@ -1,6 +1,8 @@
 package com.webproject.icollect.service.impl;
 
 import com.webproject.icollect.mapper.UserInfoMapper;
+import com.webproject.icollect.pojo.DonateDO;
+import com.webproject.icollect.pojo.ProjectDO;
 import com.webproject.icollect.pojo.UserInfoDo;
 import com.webproject.icollect.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +24,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void updateUserInfo(UserInfoDo userInfoDo){userInfoMapper.updateUserInfo(userInfoDo);}
     @Override
     public List<String> getUserInfoUID(){return userInfoMapper.getUserInfoUID();}
+    @Override
+    public List<ProjectDO> getCreatedProject(String uid) {
+        return userInfoMapper.getCreatedProject(uid);
+    }
+
+    @Override
+    public List<DonateDO> getDonationInfo(String uid) {
+        return userInfoMapper.getDonationInfo(uid);
+    }
 }

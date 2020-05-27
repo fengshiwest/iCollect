@@ -1,5 +1,7 @@
 package com.webproject.icollect.service;
 
+import com.webproject.icollect.pojo.DonateDO;
+import com.webproject.icollect.pojo.ProjectDO;
 import com.webproject.icollect.pojo.UserInfoDo;
 
 import java.util.List;
@@ -16,4 +18,8 @@ public interface UserInfoService {
     void updateUserInfo(UserInfoDo userInfoDo);
     //获取所有uid
     List<String> getUserInfoUID();
+    //获取该用户创建的所有项目信息
+    List<ProjectDO> getCreatedProject(String uid);
+    //获取用户参与的所有项目信息
+    List<DonateDO> getDonationInfo(String uid);
 }
