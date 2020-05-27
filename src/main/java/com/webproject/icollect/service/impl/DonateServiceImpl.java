@@ -31,22 +31,27 @@ public class DonateServiceImpl implements DonateService {
     }
 
     @Override
-    public List<DonateDO> getDonationByDonor(String donor) {
+    public List<DonateDO> getDonationByDonor(int donor) {
         return donateMapper.getDonationByDonor(donor);
     }
 
     @Override
-    public List<DonateDO> getDonationByDonee(String donee) {
+    public List<DonateDO> getDonationByDonee(int donee) {
         return donateMapper.getDonationByDonee(donee);
     }
 
     @Override
     public void addDonation(DonateDO donateDO) {
         ProjectDO projectDO = projectMapper.getProjectInfo(donateDO.getPid());
+        /* - update current money in project
+           - finish project if reach the target money
+         */
         double currentMoney = projectDO.getCurrentMoney();
         if((currentMoney += donateDO.getMoney()) >= projectDO.getTargetMoney())
             projectMapper.finishProject(true, projectDO.getPid());
         projectMapper.updateMoney(currentMoney, projectDO.getPid());
+        // get the real donee of project
+        donateDO.setDonee(projectDO.getAuthorID());
         donateMapper.addDonation(donateDO);
     }
 

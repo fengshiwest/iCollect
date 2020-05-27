@@ -17,14 +17,17 @@ import java.util.List;
 @Repository
 public interface DonateMapper {
 
-    @Select("select * from Donate where pid=#{pid}")
+    @Select("select * from Donate natural join (select username as donorName, id as donor from User) as Donor " +
+            "natural join (select username as doneeName, id as donee from User) as Donee where pid=#{pid}")
     List<DonateDO> getDonationByProject(String pid);
 
-    @Select("select * from Donate where donor=#{donor}")
-    List<DonateDO> getDonationByDonor(String donor);
+    @Select("select * from Donate natural join (select username as donorName, id as donor from User where id=#{donor}) as Donor " +
+            "natural join (select username as doneeName, id as donee from User) as Donee")
+    List<DonateDO> getDonationByDonor(int donor);
 
-    @Select("select * from Donate where donee=#{donee}")
-    List<DonateDO> getDonationByDonee(String donee);
+    @Select("select * from Donate natural join (select username as donorName, id as donor from User) as Donor " +
+            "natural join (select username as doneeName, id as donee from User where id=#{donee}) as Donee")
+    List<DonateDO> getDonationByDonee(int donee);
 
     @Insert("insert into Donate(did,pid,donor,donee,money,dtime) values(#{did},#{pid},#{donor},#{donee},#{money},#{dtime})")
     void addDonation(DonateDO donateDO);

@@ -5,23 +5,27 @@ public class DonateDO {
 
   private String did;
   private String pid;
-  private String donor;
-  private String donee;
+  private int donor;
+  private String donorName;
+  private int donee;
+  private String doneeName;
   private double money;
   private String dtime;
 
   public DonateDO(){}
 
-  public DonateDO(String did, String pid, String donor, String donee, double money, String dtime){
+  public DonateDO(String did, String pid, int donor, int donee, String donorName, String doneeName, double money, String dtime){
     this.did = did;
     this.pid = pid;
     this.donor = donor;
     this.donee = donee;
+    this.donorName = donorName;
+    this.doneeName = doneeName;
     this.money = money;
     this.dtime = dtime;
   }
 
-  public DonateDO(String pid, String donor, String donee, double money){
+  public DonateDO(String pid, int donor, int donee, double money){
       this.pid = pid;
       this.donor = donor;
       this.donee = donee;
@@ -50,23 +54,38 @@ public class DonateDO {
   }
 
 
-  public String getDonor() {
+  public int getDonor() {
     return donor;
   }
 
-  public void setDonor(String donor) {
+  public void setDonor(int donor) {
     this.donor = donor;
   }
 
 
-  public String getDonee() {
+  public int getDonee() {
     return donee;
   }
 
-  public void setDonee(String donee) {
+  public void setDonee(int donee) {
     this.donee = donee;
   }
 
+  public String getDonorName() {
+    return donorName;
+  }
+
+  public void setDonorName(String donorName) {
+    this.donorName = donorName;
+  }
+
+  public String getDoneeName() {
+    return doneeName;
+  }
+
+  public void setDoneeName(String doneeName) {
+    this.doneeName = doneeName;
+  }
 
   public double getMoney() {
     return money;
