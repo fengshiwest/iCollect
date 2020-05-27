@@ -14,13 +14,11 @@ public interface DonateService {
 
     List<DonateDO> getDonationByProject(String pid);
 
-    List<DonateDO> getDonationByDonor(String donor);
+    List<DonateDO> getDonationByDonor(int donor);
 
-    List<DonateDO> getDonationByDonee(String donee);
+    List<DonateDO> getDonationByDonee(int donee);
 
     void addDonation(DonateDO donateDO);
 
-
     UserDO getUserToken(int id);
-
 }

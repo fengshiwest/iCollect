@@ -51,9 +51,9 @@ public class DonateController {
     @GetMapping("/getDonationByDonor")
     public ResultVO<Object> getDonationByDonor(@RequestHeader String token) {
         if(token != null){
-            String donor;
+            int donor;
             try{
-                donor = TokenUtil.verifyToken(token).get("id");
+                donor = Integer.valueOf(TokenUtil.verifyToken(token).get("id"));
                 List<DonateDO> donateList = donateService.getDonationByDonor(donor);
                 return new ResultVO<>(200,"success",donateList);
             }catch (SignatureVerificationException | JWTDecodeException e){
@@ -66,7 +66,7 @@ public class DonateController {
     }
 
     @GetMapping("/getDonationByDonee")
-    public ResultVO<Object> getDonationByDonee(@RequestParam("donee") String donee) {
+    public ResultVO<Object> getDonationByDonee(@RequestParam("donee") int donee) {
         List<DonateDO> donateList = donateService.getDonationByDonee(donee);
         return new ResultVO<>(200,"success",donateList);
     }
@@ -93,13 +93,8 @@ public class DonateController {
 
 
     @PostMapping("addDonation")
-    public ResultVO<Object> addDonation(/*@RequestParam("pid") String pid,
-                                        @RequestParam("donor") String donor,
-                                        @RequestParam("donee") String donee,
-                                        @RequestParam("money") String moneyValue,*/
-                                        @RequestBody DonateDO donateDO,
-                                        @RequestHeader("token") String token
-                                        ){
+    public ResultVO<Object> addDonation(@RequestBody DonateDO donateDO,
+                                        @RequestHeader("token") String token){
 //原不带token的方法
 //        try{
 //            //donateDo的money是Double类型，和原本的moneyValue不同，修改时需要注意
@@ -118,19 +113,15 @@ public class DonateController {
 //            return new ResultVO<>(403,"金额有误",null);
 //        }
 
-
         if(token != null){
             try{
 
                 String did = getUUID();
                 donateDO.setDid(did);
-                String donor = TokenUtil.verifyToken(token).get("id");
+                int donor = Integer.valueOf(TokenUtil.verifyToken(token).get("id"));
                 donateDO.setDonor(donor);
-
                 String dtime = getTime();
                 donateDO.setDtime(dtime);
-
-
                 donateService.addDonation(donateDO);
                 return new ResultVO<>(200, "success", donateDO);
             }
