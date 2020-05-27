@@ -16,8 +16,9 @@ public class UserInfoDo {
 
     }
 
-    public UserInfoDo(String username){
-        this.username = username;
+
+    public UserInfoDo(String uid){
+        this.uid = uid;
     }
 
     public UserInfoDo(String name, String area, String tel, String description){

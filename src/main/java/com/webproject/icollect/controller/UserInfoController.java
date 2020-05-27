@@ -6,6 +6,8 @@ import com.webproject.icollect.pojo.DonateDO;
 import com.webproject.icollect.pojo.ProjectDO;
 import com.webproject.icollect.pojo.UserInfoDo;
 import com.webproject.icollect.pojo.vo.ResultVO;
+import com.webproject.icollect.service.DonateService;
+import com.webproject.icollect.service.ProjectService;
 import com.webproject.icollect.service.UserInfoService;
 import com.webproject.icollect.utils.TokenUtil;
 import io.swagger.annotations.Api;
@@ -20,6 +22,12 @@ import java.util.List;
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private DonateService donateService;
 
     @Autowired
     HttpServletRequest httpServletRequest;
@@ -58,13 +66,29 @@ public class UserInfoController {
             try{
                 uid = TokenUtil.verifyToken(token).get("id");
                 UserInfoDo userInfoDo = userInfoService.getUserInfoByid(uid);
-                //添加用户发起的项目信息对象
-                List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
-                userInfoDo.setCreatedProject(createdProject);
-                //添加用户参与的捐款信息对象
-                List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
-                userInfoDo.setDonationInfo(donationInfo);
-                return new ResultVO<>(200,"success",userInfoDo);
+                if(userInfoDo !=null){
+                    //添加用户发起的项目信息对象
+                    List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
+                    //List<ProjectDO> createdProject = projectService.getProjectByAuthor(uid);
+                    userInfoDo.setCreatedProject(createdProject);
+                    //添加用户参与的捐款信息对象
+                    //List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
+                    List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
+                    userInfoDo.setDonationInfo(donationInfo);
+                    return new ResultVO<>(200,"success",userInfoDo);
+                }
+                else{
+                    UserInfoDo setUid = new UserInfoDo(uid);
+                    //添加用户发起的项目信息对象
+                    List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
+                    setUid.setCreatedProject(createdProject);
+                    //添加用户参与的捐款信息对象
+                    //List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
+                    List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
+                    setUid.setDonationInfo(donationInfo);
+                    userInfoService.addUserInfo(setUid);
+                    return new ResultVO<>(200,"success",setUid);
+                }
             }catch(SignatureVerificationException | JWTDecodeException e){
                 return new ResultVO<Object>(400,"未登录",null);
             }
