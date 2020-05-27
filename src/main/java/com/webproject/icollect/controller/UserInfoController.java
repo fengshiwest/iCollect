@@ -72,8 +72,8 @@ public class UserInfoController {
                     //List<ProjectDO> createdProject = projectService.getProjectByAuthor(uid);
                     userInfoDo.setCreatedProject(createdProject);
                     //添加用户参与的捐款信息对象
-                    //List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
-                    List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
+                    List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
+                    //List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
                     userInfoDo.setDonationInfo(donationInfo);
                     return new ResultVO<>(200,"success",userInfoDo);
                 }
@@ -83,8 +83,8 @@ public class UserInfoController {
                     List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
                     setUid.setCreatedProject(createdProject);
                     //添加用户参与的捐款信息对象
-                    //List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
-                    List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
+                    List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
+                    //List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
                     setUid.setDonationInfo(donationInfo);
                     userInfoService.addUserInfo(setUid);
                     return new ResultVO<>(200,"success",setUid);
