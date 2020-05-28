@@ -6,16 +6,18 @@ public class CommentDO {
   private String cid;
   private String ctime;
   private String pid;
+  private String projectName;
   private int uid;
   private String username;
   private String content;
 
   public CommentDO(){}
 
-  public CommentDO(String cid,String ctime, String pid, int uid, String username, String content){
+  public CommentDO(String cid,String ctime, String pid, String projectName, int uid, String username, String content){
     this.cid = cid;
     this.ctime = ctime;
     this.pid = pid;
+    this.projectName = projectName;
     this.uid = uid;
     this.username = username;
     this.content = content;
@@ -26,7 +28,6 @@ public class CommentDO {
     this.uid = uid;
     this.content = content;
   }
-
 
 
   public String getCid() {
@@ -45,7 +46,6 @@ public class CommentDO {
     this.ctime = ctime;
   }
 
-
   public String getPid() {
     return pid;
   }
@@ -54,6 +54,13 @@ public class CommentDO {
     this.pid = pid;
   }
 
+  public String getProjectName() {
+    return projectName;
+  }
+
+  public void setProjectName(String projectName) {
+    this.projectName = projectName;
+  }
 
   public int getUid() {
     return uid;
