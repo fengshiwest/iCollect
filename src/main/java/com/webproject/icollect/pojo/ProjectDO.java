@@ -9,7 +9,7 @@ public class ProjectDO {
   private String author = "";
   private String name = "";
   private String introduction  = "";
-  private String image  = "";
+  private String image;
   private String startTime  = "";
   private String endTime  = "";
   private double targetMoney;
@@ -17,7 +17,7 @@ public class ProjectDO {
   private boolean isFinished;
   private boolean isChecked;
   private boolean isEnded;
-  private String qrCode = "";
+  private String qrCode;
   private String category;
 
   public String getPid() {

@@ -27,13 +27,13 @@ public class ImageServiceImpl implements ImageService {
     private String PATH;
 
     public ImageServiceImpl(){
-        try {
-            PATH = ResourceUtils.getURL("classpath:").getPath() + "image/";
+//        try {
+//            PATH = ResourceUtils.getURL("classpath:").getPath() + "image/";
+            PATH = "/www/wwwroot/image/";
             System.out.println(PATH);
-        }catch (IOException e){
-            PATH = "/home/image/";
-            e.printStackTrace();
-        }
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -79,13 +79,13 @@ public class ImageServiceImpl implements ImageService {
         ProjectDO projectDO = projectMapper.getProjectInfo(pid);
         if("image".equals(type)) {
             String image = projectDO.getImage();
-            if(image != null)
+            if(image != null && image.length() > 0)
                 delete("project", pid, image);
             projectMapper.setImage(imgName, pid);
         }
         else {
             String qrCode = projectDO.getImage();
-            if(qrCode != null)
+            if(qrCode != null && qrCode.length() > 0)
                 delete("project", pid, qrCode);
             projectMapper.setQrCode(imgName, pid);
         }
@@ -99,7 +99,7 @@ public class ImageServiceImpl implements ImageService {
         write(dir, file);
         UserDO userDO = userLoginMapper.findUserByUsername(username);
         String avatar = userDO.getAvatar();
-        if(avatar != null)
+        if(avatar != null && avatar.length() > 0)
             delete("user", username, userDO.getAvatar());
         userLoginMapper.setAvatar(imgName, username);
     }
