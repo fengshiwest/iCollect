@@ -2,6 +2,8 @@ package com.webproject.icollect.service.impl;
 
 import com.webproject.icollect.mapper.ProjectMapper;
 import com.webproject.icollect.mapper.UserLoginMapper;
+import com.webproject.icollect.pojo.ProjectDO;
+import com.webproject.icollect.pojo.UserDO;
 import com.webproject.icollect.service.ImageService;
 import com.webproject.icollect.utils.exception.ImageException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,10 +76,19 @@ public class ImageServiceImpl implements ImageService {
         String imgName = type+"-"+file.getOriginalFilename();
         File dir = new File(PATH+"project/"+pid+"/", imgName);
         write(dir, file);
-        if("image".equals(type))
+        ProjectDO projectDO = projectMapper.getProjectInfo(pid);
+        if("image".equals(type)) {
+            String image = projectDO.getImage();
+            if(image != null)
+                delete("project", pid, image);
             projectMapper.setImage(imgName, pid);
-        else
+        }
+        else {
+            String qrCode = projectDO.getImage();
+            if(qrCode != null)
+                delete("project", pid, qrCode);
             projectMapper.setQrCode(imgName, pid);
+        }
     }
 
     @Override
@@ -86,6 +97,10 @@ public class ImageServiceImpl implements ImageService {
         String imgName = file.getOriginalFilename();
         File dir = new File(PATH+username+"/", imgName);
         write(dir, file);
+        UserDO userDO = userLoginMapper.findUserByUsername(username);
+        String avatar = userDO.getAvatar();
+        if(avatar != null)
+            delete("user", username, userDO.getAvatar());
         userLoginMapper.setAvatar(imgName, username);
     }
 
@@ -93,7 +108,8 @@ public class ImageServiceImpl implements ImageService {
     public void delete(String type, String id, String imgName) {
         File dir = new File(PATH + type + "/" + id + "/", imgName);
         if(!dir.exists())
-            throw new ImageException(400, "图片不存在");
+            return;
+//            throw new ImageException(400, "图片不存在");
         if("project".equals(type)) {
             if ("image".equals(imgName.substring(0, 5)))
                 projectMapper.setImage(null, id);
