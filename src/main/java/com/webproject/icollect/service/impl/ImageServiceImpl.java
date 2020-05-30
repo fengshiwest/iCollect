@@ -95,7 +95,7 @@ public class ImageServiceImpl implements ImageService {
     public void uploadUser(MultipartFile file, HttpServletRequest request) {
         String username = request.getParameter("username");
         String imgName = file.getOriginalFilename();
-        File dir = new File(PATH+username+"/", imgName);
+        File dir = new File(PATH+"user/"+username+"/", imgName);
         write(dir, file);
         UserDO userDO = userLoginMapper.findUserByUsername(username);
         String avatar = userDO.getAvatar();
