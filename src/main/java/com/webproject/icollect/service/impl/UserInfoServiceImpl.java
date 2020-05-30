@@ -1,5 +1,7 @@
 package com.webproject.icollect.service.impl;
-
+/**
+ * create by Zhang Ding
+ * */
 import com.webproject.icollect.mapper.UserInfoMapper;
 import com.webproject.icollect.pojo.DonateDO;
 import com.webproject.icollect.pojo.ProjectDO;
@@ -27,6 +29,21 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<ProjectDO> getCreatedProject(String uid) {
         return userInfoMapper.getCreatedProject(uid);
+    }
+
+    @Override
+    public void updateAvatar(UserInfoDo userInfoDo) {
+        userInfoMapper.updateAvatar(userInfoDo);
+    }
+
+    @Override
+    public String getAvatarFromUser(String uid) {
+        return userInfoMapper.getAvatarFromUser(uid);
+    }
+
+    @Override
+    public String getUsernameFromUser(String uid) {
+        return userInfoMapper.getUsernameFromUser(uid);
     }
 
     @Override

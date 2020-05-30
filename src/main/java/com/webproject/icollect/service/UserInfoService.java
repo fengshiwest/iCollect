@@ -22,4 +22,10 @@ public interface UserInfoService {
     List<ProjectDO> getCreatedProject(String uid);
     //获取用户参与的所有项目信息
     List<DonateDO> getDonationInfo(String uid);
+    //从user表中获取头像图片
+    String getAvatarFromUser(String uid);
+    //从user表中获取用户名
+    String getUsernameFromUser(String uid);
+    //更新user表中的头像图片
+    void updateAvatar(UserInfoDo userInfoDo);
 }

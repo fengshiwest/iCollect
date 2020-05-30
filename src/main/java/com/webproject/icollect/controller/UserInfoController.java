@@ -1,13 +1,13 @@
 package com.webproject.icollect.controller;
-
+/**
+ * create by Zhang Ding
+ * */
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.webproject.icollect.pojo.DonateDO;
 import com.webproject.icollect.pojo.ProjectDO;
 import com.webproject.icollect.pojo.UserInfoDo;
 import com.webproject.icollect.pojo.vo.ResultVO;
-import com.webproject.icollect.service.DonateService;
-import com.webproject.icollect.service.ProjectService;
 import com.webproject.icollect.service.UserInfoService;
 import com.webproject.icollect.utils.TokenUtil;
 import io.swagger.annotations.Api;
@@ -24,30 +24,29 @@ public class UserInfoController {
     private UserInfoService userInfoService;
 
     @Autowired
-    private ProjectService projectService;
-
-    @Autowired
-    private DonateService donateService;
-
-    @Autowired
     HttpServletRequest httpServletRequest;
     //编辑用户信息
     @PostMapping("/setUserInfo")
     public ResultVO<Object> modifyUserInfo(@RequestHeader String token, @RequestBody UserInfoDo userInfoDo){
-
+        //根据token是否为空判断用户是否已登录
         if(token!=null){
             String uid;
             try {
                 //获取token中的id作为区分用户的uid主键
                 uid = TokenUtil.verifyToken(token).get("id");
                 userInfoDo.setUid(uid);
-                //判断更新数据行
+                //从user表中获取对应id的用户名字段
+                String username = userInfoService.getUsernameFromUser(uid);
+                userInfoDo.setUsername(username);
+                //如果已经存在该uid的数据行，则更新其中的数据
                 if(isExisted(uid)){
                     userInfoService.updateUserInfo(userInfoDo);
                 }
-                //添加一行新的数据行
+                //如果没有，则添加一行对应uid的数据行
                 else{
                     userInfoService.addUserInfo(userInfoDo);
+                    //更新user表中的用户头像
+                    userInfoService.updateAvatar(userInfoDo);
                 }
                 return new ResultVO<Object>(200,"success",userInfoDo);
             }catch (SignatureVerificationException | JWTDecodeException e){
@@ -69,22 +68,25 @@ public class UserInfoController {
                 if(userInfoDo !=null){
                     //添加用户发起的项目信息对象
                     List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
-                    //List<ProjectDO> createdProject = projectService.getProjectByAuthor(uid);
                     userInfoDo.setCreatedProject(createdProject);
                     //添加用户参与的捐款信息对象
                     List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
-                    //List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
                     userInfoDo.setDonationInfo(donationInfo);
                     return new ResultVO<>(200,"success",userInfoDo);
                 }
+                //如果userInfo表中没有该uid的数据行，则添加
                 else{
                     UserInfoDo setUid = new UserInfoDo(uid);
+                    //从user表中获取用户名和头像图片
+                    String username = userInfoService.getUsernameFromUser(uid);
+                    setUid.setUsername(username);
+                    String avatar  = userInfoService.getAvatarFromUser(uid);
+                    setUid.setAvatar(avatar);
                     //添加用户发起的项目信息对象
                     List<ProjectDO> createdProject = userInfoService.getCreatedProject(uid);
                     setUid.setCreatedProject(createdProject);
                     //添加用户参与的捐款信息对象
                     List<DonateDO> donationInfo = userInfoService.getDonationInfo(uid);
-                    //List<DonateDO> donationInfo = donateService.getDonationByDonor(uid);
                     setUid.setDonationInfo(donationInfo);
                     userInfoService.addUserInfo(setUid);
                     return new ResultVO<>(200,"success",setUid);
@@ -102,7 +104,6 @@ public class UserInfoController {
     public boolean isExisted(String uid){
        return userInfoService.getUserInfoUID().contains(uid);
     }
-
 
 
 }

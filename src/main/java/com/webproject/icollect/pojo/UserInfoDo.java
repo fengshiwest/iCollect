@@ -1,5 +1,7 @@
 package com.webproject.icollect.pojo;
-
+/**
+ * create by Zhang Ding
+ * */
 import java.util.List;
 
 public class UserInfoDo {
@@ -9,23 +11,27 @@ public class UserInfoDo {
     private String area;
     private String tel;
     private String description;
+    //获取用户头像图片
+    private String avatar;
+    //用户发起的项目信息
     private List<ProjectDO> createdProject;
+    //用户参与的项目信息
     private List<DonateDO> donationInfo;
 
     public UserInfoDo(){
 
     }
 
-
     public UserInfoDo(String uid){
         this.uid = uid;
     }
 
-    public UserInfoDo(String name, String area, String tel, String description){
+    public UserInfoDo(String name, String area, String tel, String description, String avatar){
         this.username = name;
         this.area = area;
         this.tel = tel;
         this.description = description;
+        this.avatar = avatar;
     }
 
     public UserInfoDo(String name, String area, String tel){
@@ -37,6 +43,14 @@ public class UserInfoDo {
     public UserInfoDo(String name,String tel){
         this.username = name;
         this.tel = tel;
+    }
+
+    public void setAvatar(String avatar){
+        this.avatar = avatar;
+    }
+
+    public String getAvatar(){
+        return this.avatar;
     }
 
     public void setDonationInfo(List<DonateDO> dp){
