@@ -84,7 +84,7 @@ public class ImageServiceImpl implements ImageService {
             projectMapper.setImage(imgName, pid);
         }
         else {
-            String qrCode = projectDO.getImage();
+            String qrCode = projectDO.getQrCode();
             if(qrCode != null && qrCode.length() > 0)
                 delete("project", pid, qrCode);
             projectMapper.setQrCode(imgName, pid);
@@ -95,7 +95,7 @@ public class ImageServiceImpl implements ImageService {
     public void uploadUser(MultipartFile file, HttpServletRequest request) {
         String username = request.getParameter("username");
         String imgName = file.getOriginalFilename();
-        File dir = new File(PATH+username+"/", imgName);
+        File dir = new File(PATH+"user/"+username+"/", imgName);
         write(dir, file);
         UserDO userDO = userLoginMapper.findUserByUsername(username);
         String avatar = userDO.getAvatar();
