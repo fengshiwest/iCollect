@@ -36,7 +36,7 @@ public class CommentDO {
   public void setAvatar(String avatar){
     this.avatar = avatar;
   }
-  public String getAvatar(String avatar){
+  public String getAvatar(){
     return this.avatar;
   }
 
