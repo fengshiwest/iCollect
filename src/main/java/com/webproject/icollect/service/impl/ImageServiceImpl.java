@@ -84,7 +84,7 @@ public class ImageServiceImpl implements ImageService {
             projectMapper.setImage(imgName, pid);
         }
         else {
-            String qrCode = projectDO.getImage();
+            String qrCode = projectDO.getQrCode();
             if(qrCode != null && qrCode.length() > 0)
                 delete("project", pid, qrCode);
             projectMapper.setQrCode(imgName, pid);
