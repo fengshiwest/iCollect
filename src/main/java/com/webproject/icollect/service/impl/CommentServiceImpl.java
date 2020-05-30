@@ -43,6 +43,10 @@ public class CommentServiceImpl implements CommentService {
         commentMapper.deleteComment(cid);
     }
 
+    @Override
+    public String getAvatarFromUser(int uid) {
+        return commentMapper.getAvatarFromUser(uid);
+    }
 
     @Override
     public UserDO getUserToken(int id) {
