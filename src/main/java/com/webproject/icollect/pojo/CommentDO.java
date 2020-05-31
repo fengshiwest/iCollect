@@ -10,10 +10,11 @@ public class CommentDO {
   private int uid;
   private String username;
   private String content;
+  private String avatar;
 
   public CommentDO(){}
 
-  public CommentDO(String cid,String ctime, String pid, String projectName, int uid, String username, String content){
+  public CommentDO(String cid,String ctime, String pid, String projectName, int uid, String username, String content, String avatar){
     this.cid = cid;
     this.ctime = ctime;
     this.pid = pid;
@@ -21,6 +22,7 @@ public class CommentDO {
     this.uid = uid;
     this.username = username;
     this.content = content;
+    this.avatar = avatar;
   }
 
   public CommentDO(String pid, int uid, String content){
@@ -86,4 +88,11 @@ public class CommentDO {
     this.content = content;
   }
 
+  public String getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
 }

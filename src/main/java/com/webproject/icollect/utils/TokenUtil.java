@@ -17,7 +17,6 @@ public class TokenUtil {
     private static String ISSUER = "sys_user";
 
     public static String getToken(UserDO user){
-
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         // token 过期时间 4 小时
         Calendar c = Calendar.getInstance();
@@ -30,10 +29,7 @@ public class TokenUtil {
                 withClaim("id",String.valueOf(user.getId())).
                 withClaim("username", user.getUsername()).
                 withClaim("role",String.valueOf(user.getRole()));
-
-
         return builder.sign(algorithm);
-
     }
 
     public static Map<String, String> verifyToken(String token) throws SignatureVerificationException {

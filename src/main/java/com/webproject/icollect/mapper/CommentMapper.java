@@ -19,7 +19,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CommentMapper {
-    @Select("select * from Comment NATURAL JOIN (select username, id as uid from User) as User " +
+    @Select("select * from Comment NATURAL JOIN (select username,avatar, id as uid from User) as User " +
             "NATURAL JOIN (select pid, name as projectName from Project where pid=#{pid}) as Project")
     List<CommentDO> getCommentByPid(String pid);
 
