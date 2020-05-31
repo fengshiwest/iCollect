@@ -62,6 +62,8 @@ public class CommentController {
         int uid;
         try{
             uid = Integer.valueOf(TokenUtil.verifyToken(token).get("id"));
+            //String avatar = commentService.getAvatarFromUser(uid);
+
             return new ResultVO<>(200, "success", commentService.getCommentByUid(uid));
         }catch (SignatureVerificationException | JWTDecodeException e){
             return new ResultVO<>(400,"未登录",null);
@@ -103,6 +105,8 @@ public class CommentController {
                 commentDO.setCid(cid);
                 String ctime = getTime();
                 commentDO.setCtime(ctime);
+                String avatar = commentService.getAvatarFromUser(uid);
+                commentDO.setAvatar(avatar);
                 commentService.addComment(commentDO);
                 return new ResultVO<>(200, "success", commentDO);
 

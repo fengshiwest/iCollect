@@ -25,4 +25,6 @@ public interface CommentService {
     void addComment(CommentDO comment);
 
     void deleteComment(String cid);
+
+    String getAvatarFromUser(int uid);
 }
